@@ -7,7 +7,7 @@ scene.background = "#223366"
 
 cx, cy = centre = scene.width // 2, scene.height // 2
 
-alabel = scene.layers[0].add_label(0, pos=(cx, cy + 25))
+alabel = scene.layers[0].add_label(0, pos=(cx, cy + 25), align="center")
 blabel = scene.layers[0].add_label(0)
 clabel = scene.layers[0].add_label(0)
 

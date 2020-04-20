@@ -10,9 +10,8 @@ RED = '#cc0000'
 
 cx, cy = centre = scene.width // 2, scene.height // 2
 
-alabel = scene.layers[0].add_label(0, pos=(cx, cy + 25))
+alabel = scene.layers[0].add_label(0, pos=(cx, cy + 25), align="center")
 blabel = scene.layers[0].add_label(0)
-clabel = scene.layers[0].add_label(0)
 
 
 equation = scene.layers[0].add_label(
@@ -77,19 +76,14 @@ def on_mouse_move(pos):
     oy = math.copysign(20, dy)
     if dx > 0:
         blabel.align = 'left'
-        clabel.align = 'right'
         blabel.pos = x + 10, cy + dy // 2
-        clabel.pos = cx + dx // 2, cy + dy // 2 + oy
     else:
         blabel.align = 'right'
-        clabel.align = 'left'
         blabel.pos = x - 10, cy + dy // 2
-        clabel.pos = cx + dx // 2, cy + dy // 2 + oy
     alabel.x = cx + dx // 2
 
     alabel.text = dx
     blabel.text = dy
-    clabel.text = '{:0.2f}'.format(math.hypot(dx, dy))
 
     # Collision test
     collision = (dx * dx + dy * dy) < 160 * 160
