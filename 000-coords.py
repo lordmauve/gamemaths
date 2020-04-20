@@ -1,3 +1,4 @@
+"""Cartesian coordinates demo."""
 import wasabi2d as w2d
 
 scene = w2d.Scene()
@@ -12,21 +13,18 @@ ax = scene.layers[0].add_line(
     stroke_width=2
 )
 
+centre = scene.width // 2, scene.height // 2
+cursor = scene.layers[0].add_label(centre, pos=centre, align="center")
+
 
 @w2d.event
 def on_mouse_move(pos):
     global ax
     x, y = pos
-    xlabel.x = x
-    xlabel.text = str(x)
-    ylabel.y = y
-    ylabel.text = str(y)
-    ax.delete()
-    ax = scene.layers[0].add_line(
-        [(5, y + 5), (5, y), (5, 5), (x, 5), (x + 5, 5)],
-        color="white",
-        stroke_width=2
-    )
+    xlabel.x = xlabel.text = x
+    ylabel.y = ylabel.text = y
+    ax.vertices = [(5, y), (5, 5), (x, 5)]
+    cursor.pos = cursor.text = pos
 
 
 w2d.run()
