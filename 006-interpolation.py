@@ -54,16 +54,16 @@ async def move_actor():
 
 
 functions = cycle([
-    lambda x: x ** 2,
-    lambda x: x ** 0.5,
-    lambda x: 0.5 - 0.5 * np.cos(np.pi * x),
-    lambda x: x,
+    TIMES ** 2,
+    TIMES ** 0.5,
+    0.5 - 0.5 * np.cos(np.pi * TIMES),
+    np.array(list(map(w2d.animation.bounce_end, TIMES))),
+    TIMES,
 ])
 
 
-async def switch_interp(func):
+async def switch_interp(new_ys):
     global ys
-    new_ys = func(TIMES)
     orig_ys = ys
 
     async for t in w2d.clock.coro.frames(seconds=0.2):
