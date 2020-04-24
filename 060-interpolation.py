@@ -55,7 +55,7 @@ async def move_actor():
 
 functions = cycle([
     TIMES ** 2,
-    TIMES ** 0.5,
+    2 * TIMES - TIMES ** 2,
     0.5 - 0.5 * np.cos(np.pi * TIMES),
     np.array(list(map(w2d.animation.bounce_end, TIMES))),
     TIMES,

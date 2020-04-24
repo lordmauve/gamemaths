@@ -13,8 +13,20 @@ actor = scene.layers[1].add_star(
     pos=(0, 0),
     color='cyan'
 )
-
 actor.target = 400, 400
+
+
+scene.layers[0].add_line(
+    [(50, 450), (50, 550), (750, 550)],
+    color='#cccccc',
+)
+
+TIMES = np.linspace(0, 1, 50)
+plot = scene.layers[0].add_line(
+    np.zeros((len(TIMES), 2)),
+    color='yellow',
+    stroke_width=2
+)
 
 
 @w2d.event
@@ -22,7 +34,7 @@ def on_mouse_move(pos):
     actor.target = pos
 
 
-LINEAR_SPEED = 10
+LINEAR_SPEED = 8
 APPROACH_PER_FRAME = 0.1
 
 
@@ -59,10 +71,28 @@ approach = approach_linear
 funcs = cycle([approach_linear, approach_geometric])
 
 
+def plot_approach(func):
+    ys = []
+    pos = (100, 0)
+    target = (0, 0)
+    for v in TIMES:
+        ys.append(pos[0])
+        pos = func(pos, target)
+    return np.array([
+        TIMES * 700 + 50,
+        550 - np.array(ys)
+    ]).T
+
+
+plot.vertices = plot_approach(approach)
+
+
+
 @w2d.event
 def on_mouse_down():
     global approach
     approach = next(funcs)
+    plot.vertices = plot_approach(approach)
 
 
 @w2d.event

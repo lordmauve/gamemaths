@@ -59,8 +59,9 @@ def on_mouse_move(pos):
         blabel.text = dy
         clabel.text = '{:0.2f}'.format(math.hypot(dx, dy))
     else:
-        alabel.text, blabel.text = 'ab'
-        clabel.text = 'a² + b²'
+        alabel.text = 'dx'
+        blabel.text = 'dy'
+        clabel.text = '√(dx² + dy²)'
 
     ax.vertices = [centre, (x, centre[1]), pos]
     hypot.vertices = [centre, pos]
