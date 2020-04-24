@@ -23,6 +23,21 @@ plot = scene.layers[0].add_line(
     stroke_width=2
 )
 
+def label(text, pos):
+    return scene.layers[0].add_label(
+        text,
+        pos=pos,
+        align="right",
+    )
+
+label('1', (95, 105))
+label('0', (95, 505))
+label('1', (500, 520))
+label('t', (300, 540))
+
+
+func_label = label('f(t) = t', (500, 80))
+
 mark = scene.layers[1].add_circle(
     pos=(100, 500),
     radius=8,
@@ -54,11 +69,16 @@ async def move_actor():
 
 
 functions = cycle([
-    TIMES ** 2,
-    2 * TIMES - TIMES ** 2,
-    0.5 - 0.5 * np.cos(np.pi * TIMES),
-    np.array(list(map(w2d.animation.bounce_end, TIMES))),
-    TIMES,
+    ('f(t) = t * t', TIMES ** 2),
+    ('f(t) = 2 * t - t * t', 2 * TIMES - TIMES ** 2),
+    (
+        'f(t) = (1 - math.cos(t * math.pi)) / 2',
+        0.5 - 0.5 * np.cos(np.pi * TIMES)
+    ),
+    ('f(t) = <4 parabolas>',
+        np.array(list(map(w2d.animation.bounce_end, TIMES)))
+    ),
+    ('f(t) = t', TIMES),
 ])
 
 
@@ -78,7 +98,9 @@ async def switch_interp(new_ys):
 
 @w2d.event
 def on_mouse_down():
-    w2d.clock.coro.run(switch_interp(next(functions)))
+    newtext, newfunc = next(functions)
+    func_label.text = newtext
+    w2d.clock.coro.run(switch_interp(newfunc))
 
 
 w2d.clock.coro.run(move_actor())
