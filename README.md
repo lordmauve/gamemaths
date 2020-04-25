@@ -5,7 +5,7 @@ Slides for my remote.python.pizza 2020 talk, "Game maths in 10 minutes".
 
 ## Installing
 
-Please install [wasabi2d](https://github.com/lormauve/wasabi2d/) from master (because the talk was a good opportunity to add features I needed).
+Please install [wasabi2d](https://github.com/lordmauve/wasabi2d/) from master (because the talk was a good opportunity to add features I needed).
 
 
 ## Running
