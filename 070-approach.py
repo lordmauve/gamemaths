@@ -29,6 +29,14 @@ plot = scene.layers[0].add_line(
 )
 
 
+func_label = scene.layers[0].add_label(
+    "pos += SPEED * normalize(target - pos)",
+    pos=(750, 475),
+    align="right",
+    font="monospace",
+)
+
+
 @w2d.event
 def on_mouse_move(pos):
     actor.target = pos
@@ -68,7 +76,11 @@ def approach_geometric(pos, target):
 
 
 approach = approach_linear
-funcs = cycle([approach_linear, approach_geometric])
+funcs = cycle([
+    ("pos += SPEED * normalize(target - pos)", approach_linear),
+    ("pos += (target - pos) * RATE  # rate in (0, 1)", approach_geometric),
+])
+
 
 
 def plot_approach(func):
@@ -91,8 +103,9 @@ plot.vertices = plot_approach(approach)
 @w2d.event
 def on_mouse_down():
     global approach
-    approach = next(funcs)
+    label, approach = next(funcs)
     plot.vertices = plot_approach(approach)
+    func_label.text = label
 
 
 @w2d.event

@@ -6,7 +6,7 @@ import numpy as np
 scene = w2d.Scene()
 scene.background = "#223366"
 
-cx, cy = centre = scene.width // 2, scene.height // 2
+cx, cy = centre = scene.width // 2, scene.height // 2 - 30
 
 scene.layers[0].add_circle(
     pos=centre,
@@ -29,6 +29,13 @@ ax = scene.layers[0].add_line(
     [centre, (0, centre[1]), (0, 0)],
     color="white",
     stroke_width=0.2
+)
+
+code = scene.layers[0].add_label(
+    "vec = math.cos(theta), math.sin(theta)\n" +
+    "theta = math.atan2(dy, dx)",
+    pos=(50, 530),
+    font="monospace",
 )
 
 vis = False

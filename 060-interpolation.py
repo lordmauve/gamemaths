@@ -7,7 +7,7 @@ from itertools import cycle
 scene = w2d.Scene(background="#223366")
 
 scene.layers[0].add_line(
-    [(100, 100), (100, 500), (500, 500)],
+    [(50, 100), (50, 500), (450, 500)],
     color='#cccccc',
 )
 
@@ -16,33 +16,34 @@ ys = TIMES
 
 plot = scene.layers[0].add_line(
     np.array([
-        TIMES * 400 + 100,
+        TIMES * 400 + 50,
         500 - ys * 400
     ]).T,
     color='yellow',
     stroke_width=2
 )
 
-def label(text, pos, align="right"):
+def label(text, pos, align="right", font=None):
     return scene.layers[0].add_label(
         text,
         pos=pos,
         align=align,
+        font=font,
     )
 
 
-label('pos = A + f(t / end) * (B - A)', (790, 525), "right")
+label('pos = A + f(t / end) * (B - A)', (790, 525), "right", font="monospace")
 
-label('1', (95, 105))
-label('0', (95, 505))
-label('1', (500, 520))
-label('t', (300, 540))
+label('1', (45, 105))
+label('0', (45, 505))
+label('1', (450, 520))
+label('t', (350, 540))
 
 
-func_label = label('f(t) = t', (500, 80))
+func_label = label('f(t) = t', (450, 80), font="monospace")
 
 mark = scene.layers[1].add_circle(
-    pos=(100, 500),
+    pos=(50, 500),
     radius=8,
     color='red',
 )
@@ -52,7 +53,7 @@ TOP = 100
 BOTTOM = 450
 
 actor = scene.layers[1].add_circle(
-    pos=(700, TOP),
+    pos=(630, TOP),
     radius=30,
     color='green'
 )
@@ -65,7 +66,7 @@ async def move_actor():
             frac = np.interp(t, TIMES, ys)
             actor.y = target * frac + (1 - frac) * sy
 
-            mark.pos = 100 + t * 400, 500 - 400 * frac
+            mark.pos = 50 + t * 400, 500 - 400 * frac
 
 
         await w2d.clock.coro.sleep(1)
@@ -93,7 +94,7 @@ async def switch_interp(new_ys):
         frac = t / 0.2
         ys = frac * new_ys + (1 - frac) * ys
         plot.vertices = np.array([
-            TIMES * 400 + 100,
+            TIMES * 400 + 50,
             500 - ys * 400
         ]).T
 

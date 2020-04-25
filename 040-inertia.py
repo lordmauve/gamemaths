@@ -12,7 +12,8 @@ equation = scene.layers[0].add_label(
     "velocity = input * ACCEL + velocity * DRAG\n" +
     "position += velocity",
     pos=(centre[0], scene.height - 60),
-    align="center"
+    align="center",
+    font="monospace",
 )
 
 ACCEL = 1
