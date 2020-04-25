@@ -1,1 +1,1 @@
-wasabi2d==1.3
+git+https://github.com/lordmauve/wasabi2d#egg=wasabi2d
