@@ -23,12 +23,15 @@ plot = scene.layers[0].add_line(
     stroke_width=2
 )
 
-def label(text, pos):
+def label(text, pos, align="right"):
     return scene.layers[0].add_label(
         text,
         pos=pos,
-        align="right",
+        align=align,
     )
+
+
+label('pos = A + f(t / end) * (B - A)', (790, 525), "right")
 
 label('1', (95, 105))
 label('0', (95, 505))
@@ -46,7 +49,7 @@ mark = scene.layers[1].add_circle(
 
 
 TOP = 100
-BOTTOM = 500
+BOTTOM = 450
 
 actor = scene.layers[1].add_circle(
     pos=(700, TOP),
