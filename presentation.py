@@ -23,7 +23,7 @@ def show_slide(p):
     scene.layers.clear()
     w2d.clock.clock.clear()
     ns = types.ModuleType(p.name)
-    exec(compile(p.read_text(), str(p), 'exec'), ns.__dict__)
+    exec(compile(p.read_text(encoding='utf-8'), str(p), 'exec'), ns.__dict__)
 
 
 def next_slide():

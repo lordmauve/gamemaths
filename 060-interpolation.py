@@ -1,3 +1,4 @@
+# coding: utf-8
 """Illustrate interpolation with different easing functions."""
 import wasabi2d as w2d
 import numpy as np

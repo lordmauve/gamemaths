@@ -1,3 +1,4 @@
+# coding: utf-8
 """Cartesian coordinates demo."""
 import wasabi2d as w2d
 

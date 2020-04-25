@@ -1,3 +1,4 @@
+# coding: utf-8
 """Control a sprite without inertia."""
 import wasabi2d as w2d
 from wasabi2d.keyboard import keyboard, keys

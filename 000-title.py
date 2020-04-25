@@ -1,3 +1,4 @@
+# coding: utf-8
 """Title screen."""
 import wasabi2d as w2d
 

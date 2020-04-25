@@ -1,3 +1,4 @@
+# coding: utf-8
 """Pythagoras's Theorem."""
 import math
 import wasabi2d as w2d
